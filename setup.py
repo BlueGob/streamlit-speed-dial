@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="streamlit-speed-dial",
-    version="0.0.2",
+    version="0.0.3",
     author="Moslem gannoun",
     author_email="moslemgannoun@gmail.com",
     description="Streamlit component that allows you to make speed dial ",
