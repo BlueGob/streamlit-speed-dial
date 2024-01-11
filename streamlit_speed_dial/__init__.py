@@ -14,7 +14,7 @@ else:
     build_dir = os.path.join(parent_dir, "frontend/build")
     _component_func = components.declare_component("streamlit_speed_dial", path=build_dir)
 
-def streamlit_speed_dial(actions:list[dict[str,str]],direction:str, key=None):
+def streamlit_speed_dial(actions:list[dict[str,str]],direction="up", key=None):
     """Create a speed dial button .
 
     Parameters

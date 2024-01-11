@@ -4,7 +4,7 @@ import {
   withStreamlitConnection,
 } from "streamlit-component-lib"
 import React, {ReactNode } from "react"
-import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material"
+import { Box, SpeedDial, SpeedDialAction, SpeedDialIcon, styled } from "@mui/material"
 
 interface State {
   open: boolean
@@ -12,16 +12,28 @@ interface State {
 
 class MyComponent extends StreamlitComponentBase<State> {
   public state = {open:false }
+   
+  StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
+    position: 'absolute',
+    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+    },
+  }));
   
   public render = (): ReactNode => {
     const actions = this.props.args["actions"]
     const direction = this.props.args["direction"]
+    const height = 80*(actions.length)
     return (
       <span>
-       <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
-      <SpeedDial
+       <Box sx={{ position: 'relative', mt: 3, height: height,bottom: 10 }}>
+      <this.StyledSpeedDial
         ariaLabel="SpeedDial"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
         direction={direction}
         onClose={()=>this.setState({open:false})}
@@ -36,7 +48,7 @@ class MyComponent extends StreamlitComponentBase<State> {
             onClick={()=>{this.setState({open:false});Streamlit.setComponentValue(action.name)}}
           />
         ))}
-      </SpeedDial>
+      </this.StyledSpeedDial>
     </Box>
       </span>
     )
